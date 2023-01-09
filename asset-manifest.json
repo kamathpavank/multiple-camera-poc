@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/multiple-camera-poc/static/css/main.027a1e2c.css",
+    "main.js": "/multiple-camera-poc/static/js/main.b9f8ce83.js",
+    "static/js/787.f091ca65.chunk.js": "/multiple-camera-poc/static/js/787.f091ca65.chunk.js",
+    "index.html": "/multiple-camera-poc/index.html",
+    "main.027a1e2c.css.map": "/multiple-camera-poc/static/css/main.027a1e2c.css.map",
+    "main.b9f8ce83.js.map": "/multiple-camera-poc/static/js/main.b9f8ce83.js.map",
+    "787.f091ca65.chunk.js.map": "/multiple-camera-poc/static/js/787.f091ca65.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.027a1e2c.css",
+    "static/js/main.b9f8ce83.js"
+  ]
+}
