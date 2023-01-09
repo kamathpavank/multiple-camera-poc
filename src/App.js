@@ -86,7 +86,7 @@ const App = ({ closeCapturedImages, entity_id }) => {
   }, []);
 
   useEffect(() => {
-    if (listOfVideoInputs && listOfVideoInputs.length) {
+    if (cameraId) {
       getVideo();
     }
   }, [windowSize, cameraId]);
@@ -95,6 +95,12 @@ const App = ({ closeCapturedImages, entity_id }) => {
     let videoInputs = [];
 
     const initialiseListOfVideoInputs = async () => {
+
+      //get permissions
+      const video = await navigator.mediaDevices.getUserMedia({
+        video:true
+      })
+
       // Get the details of audio and video output of the device
       const enumerateDevices = await navigator.mediaDevices.enumerateDevices();
 
@@ -102,17 +108,10 @@ const App = ({ closeCapturedImages, entity_id }) => {
       videoInputs = enumerateDevices.filter(
         (device) => device.kind === "videoinput"
       );
-
-      //   {
-      //     "deviceId": "eb8a9036171ed48ea1a5664c83739ecf2c818aed20524c21858942009ab37ea5",
-      //     "kind": "videoinput",
-      //     "label": "FaceTime HD Camera",
-      //     "groupId": "c2e39e0b80ac5b9208977fb6730b9d7023ed651e75db640e064cdd7740bb2ffa"
-      // }
       if (videoInputs && videoInputs.length) {
         let videoInputsCpy = [...videoInputs];
         let deviceCameraId = videoInputsCpy.pop().deviceId;
-        setCameraId(deviceCameraId);
+      
 
         let videoInputList = [];
 
@@ -124,12 +123,11 @@ const App = ({ closeCapturedImages, entity_id }) => {
           };
           videoInputList.push(obj);
         });
-        console.log(videoInputList, "videoInputList");
         setListOfVideoInputs(videoInputList);
+        setCameraId(deviceCameraId);
       } else {
         handleError("error", "no camera found");
       }
-      getVideo();
     };
 
     initialiseListOfVideoInputs();
@@ -155,7 +153,6 @@ const App = ({ closeCapturedImages, entity_id }) => {
         },
       })
       .then((stream) => {
-        console.log(stream, "stream");
         let video = videoRef.current;
         video.srcObject = stream;
         video.play();
